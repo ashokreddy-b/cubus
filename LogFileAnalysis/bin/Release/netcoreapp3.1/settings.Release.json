@@ -1,0 +1,4 @@
+{
+  "POLICY_NAME": "AllowSpecificOrigin",
+  "FRONT_END_CORS_ORIGIN": "https://cubos-fe.azurewebsites.net"
+}

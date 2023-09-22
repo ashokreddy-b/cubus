@@ -1,0 +1,18 @@
+{
+  //"POLICY_NAME": "AllowLocalhost3000",
+  //"FRONT_END_CORS_ORIGIN": "http://localhost:3000",
+  "POLICY_NAME": "AllowSpecificOrigin",
+  "FRONT_END_CORS_ORIGIN": "https://cubos-fe.azurewebsites.net",
+  "ERROR_LOG_KEYWORD": "(*E)",
+  "CONTAINER_NAME": "cuboscontainer",
+  "AZURE_CONNECT": "DefaultEndpointsProtocol=https;AccountName=cuboscontainer;AccountKey=Oe4LoQayCQu+4QyEmIoh2TiykGpO8BzC7xhOwDT9EGYYZ8hF0KPh1f0/+QDLxyXzQiIWfM0Ph6O6+ASt3P1jng==;EndpointSuffix=core.windows.net",
+  "DOWNLOAD_FILE_FOLDER": "data",
+  "EXTRACT_FILE_FOLDER": "Extracted",
+  "EMAIL_RECEIPIENT_ADDRESS": "cubos_support@avinsystems.com",
+  "SMTP_HOST": "mail.es-technologies.de",
+  "SMTP_PORT": "25",
+  "DATE_FORMAT": "dd/MM/yyyy",
+  "LOG_FOLDER": "\\log",
+  "API_KEY_VALUE": "cubosAuthenticationValue"
+
+}
