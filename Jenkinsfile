@@ -7,6 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
               git branch: 'main', url: 'https://github.com/ashokreddy-b/cubus.git'
+                sh 'echo "checkout Successgfully"'
             }
         }
 
