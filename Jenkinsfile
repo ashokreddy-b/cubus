@@ -20,7 +20,7 @@ pipeline {
         stage('Create Docker Image') {
             steps {
                 // Build the Docker image using the Dockerfile in the project directory
-                sh "docker build -t bapathuashokreddy/Cubus:latest ."
+                sh "docker build -t bapathuashokreddy/cubus:latest ."
             }
         }
 
@@ -29,7 +29,7 @@ pipeline {
             steps{
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'pwd', usernameVariable: 'username')]) {
                     sh "sudo docker login -u ${env.username} -p ${env.pwd}"
-                    sh 'sudo docker push bapathuashokreddy/Cubus:latest'
+                    sh 'sudo docker push bapathuashokreddy/cubus:latest'
                 }
                 
             }
@@ -37,7 +37,7 @@ pipeline {
       stage('Run the container')
       {
         steps{
-          sh 'docker run -d -p 9000:80 --name Cubus bapathuashokreddy/Cubus:latest'
+          sh 'docker run -d -p 9000:80 --name Cubus bapathuashokreddy/cubus:latest'
         }
       }
 }
