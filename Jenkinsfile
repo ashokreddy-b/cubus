@@ -1,9 +1,7 @@
 pipeline {
     agent any
 
-    environment {
-        DOTNET_CLI_HOME = tool 'DotNet'
-    }
+    
 
     stages {
         stage('Checkout') {
@@ -15,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Use the .NET CLI to build the application
-                sh "${DOTNET_CLI_HOME} build"
+                sh "dotnet build"
             }
         }
 
