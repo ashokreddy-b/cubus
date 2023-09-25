@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Use the .NET CLI to build the application
-                sh "${DOTNET_CLI_HOME}/dotnet build"
+                sh "${DOTNET_CLI_HOME} build"
             }
         }
 
