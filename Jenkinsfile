@@ -1,8 +1,5 @@
 pipeline {
     agent any
-
-    
-
     stages {
         stage('Checkout') {
             steps {
@@ -41,14 +38,14 @@ pipeline {
           sh 'docker run -d -p 9000:80 --name Cubus bapathuashokreddy/cubus:latest'
         }
       }
-         post {
+    }
+     post {
         success {
-            // This stage will always run, regardless of the build result
             emailext (
                 subject: "Build Status: ${currentBuild.currentResult}",
                 body: "The build status is: ${currentBuild.currentResult}",
                 recipientProviders: [[$class: 'CulpritsRecipientProvider']],
-                to: "recipient@example.com"  // Replace with the recipient's email address
+                to: "recipient@example.com" 
             )
         }
          failure {
@@ -60,7 +57,6 @@ pipeline {
                 to: "bapathuashokreddy@gmail.com"  // Replace with the recipient's email address
             )
         }
-         }
-}
+    }
 }
 
