@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_USERNAME = credentials('bapathuashokreddy@gmail.com')
+        DOCKER_PASSWORD = credentials('Chennareddy@123')
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -25,9 +29,16 @@ pipeline {
         stage('push Image to docker hub')
         {
             steps{
-            withCredentials([usernamePassword(credentialsId: 'Dockercredentilas', passwordVariable: 'pwd', usernameVariable: 'user')]) {
-                sh "sudo docker login -u ${env.user} -p ${env.pwd}"
-                    sh 'sudo docker push bapathuashokreddy/cubus:latest'
+                 script {
+                    // Log in to Docker Hub
+                    sh """
+                    echo \${DOCKER_PASSWORD} | docker login -u \${DOCKER_USERNAME} --password-stdin
+                    """
+                    
+                    // Build and push your Docker image
+                    sh """
+                     docker push bapathuashokreddy/cubus:latest
+                    """
                 }
                 
             }
