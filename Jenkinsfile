@@ -25,8 +25,8 @@ pipeline {
         stage('push Image to docker hub')
         {
             steps{
-                withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'pwd', usernameVariable: 'username')]) {
-                    sh "sudo docker login -u ${env.username} -p ${env.pwd}"
+                withCredentials([usernamePassword(credentialsId: 'DockerCredentials', passwordVariable: 'pwd', usernameVariable: 'user')]) {
+                    sh "sudo docker login -u ${env.user} -p ${env.pwd}"
                     sh 'sudo docker push bapathuashokreddy/cubus:latest'
                 }
                 
