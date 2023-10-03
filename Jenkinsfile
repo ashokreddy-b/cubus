@@ -1,14 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Checkout Code from GitHub') {
             steps {
               git branch: 'main', url: 'https://github.com/ashokreddy-b/cubus.git'
                 sh 'echo "checkout Successgfully"'
             }
         }
 
-        stage('Build') {
+        stage('Build the Application') {
             steps {
                 // Use the .NET CLI to build the application
                 sh "dotnet build"
@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage('push Image to docker hub')
+        stage('Docker hub login and push Docker Image to docker hub')
         {
             steps{
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'pwd', usernameVariable: 'username')]) {
