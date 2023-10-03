@@ -44,7 +44,7 @@ pipeline {
                 subject: "Build Status: ${currentBuild.currentResult}",
                 body: "The build status is: ${currentBuild.currentResult}",
                 recipientProviders: [[$class: 'CulpritsRecipientProvider']],
-                to: "recipient@example.com" 
+                to: "bapathuashokreddy@gmail.com" 
             )
         }
          failure {
