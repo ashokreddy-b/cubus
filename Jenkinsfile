@@ -41,7 +41,7 @@ pipeline {
      post {
         success {
             emailext (
-                subject: "Build Status: ${currentBuild.currentResult}",
+                subject: "Cubus Pipeline ${currentBuild.buildnumber} Status:: ${currentBuild.currentResult}",
                 body: "The build status is: ${currentBuild.currentResult}",
                 recipientProviders: [[$class: 'CulpritsRecipientProvider']],
                 to: "bapathu.ashokreddy@avinsystems.com" 
@@ -50,7 +50,7 @@ pipeline {
          failure {
             // This stage will always run, regardless of the build result
             emailext (
-                subject: "Build Status: ${currentBuild.currentResult}",
+                subject: "Cubus Pipeline ${currentBuild.buildnumber} Status: ${currentBuild.currentResult}",
                 body: "The build status is: ${currentBuild.currentResult}",
                 recipientProviders: [[$class: 'CulpritsRecipientProvider']],
                 to: "bapathu.ashokreddy@avinsystems.com"  // Replace with the recipient's email address
