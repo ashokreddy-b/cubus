@@ -12,6 +12,7 @@ pipeline {
             steps {
                 // Use the .NET CLI to build the application
                 sh "dotnet build"
+                 sh 'echo "Build Successfully"'
             }
         }
 
