@@ -44,7 +44,7 @@ pipeline {
                 subject: "Build Status: ${currentBuild.currentResult}",
                 body: "The build status is: ${currentBuild.currentResult}",
                 recipientProviders: [[$class: 'CulpritsRecipientProvider']],
-                to: "bapathuashokreddy@gmail.com" 
+                to: "bapathu.ashokreddy@avinsystems.com" 
             )
         }
          failure {
@@ -53,7 +53,7 @@ pipeline {
                 subject: "Build Status: ${currentBuild.currentResult}",
                 body: "The build status is: ${currentBuild.currentResult}",
                 recipientProviders: [[$class: 'CulpritsRecipientProvider']],
-                to: "bapathuashokreddy@gmail.com"  // Replace with the recipient's email address
+                to: "bapathu.ashokreddy@avinsystems.com"  // Replace with the recipient's email address
             )
         }
     }
