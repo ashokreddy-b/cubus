@@ -28,7 +28,7 @@ pipeline {
             steps{
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'pwd', usernameVariable: 'user')]) {
                   sh "docker login -u ${env.user} -p ${env.pwd}"
-                    sh 'sudo docker push bapathuashokreddy/cubus:latest'
+                    sh 'docker push bapathuashokreddy/cubus:latest'
                 }
             }
         }
