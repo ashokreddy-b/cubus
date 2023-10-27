@@ -1,0 +1,40 @@
+node {
+  stage('SCM') {
+git branch: 'main', url: 'https://github.com/ashokreddy-b/cubus.git'
+  }
+  stage('SonarQube Analysis') {
+   def scannerHome = tool 'SonarScanner for MSBuild'
+    withSonarQubeEnv() {
+      sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:\"cubuspipeline\""
+      sh "dotnet build"
+      sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll end"
+    }
+  }
+  stage('Build')
+  {
+      sh 'dotnet build'
+  }
+  
+  
+  stage('Create Docker Image') {
+            
+                // Build the Docker image using the Dockerfile in the project directory
+                sh "docker build -t bapathuashokreddy/cubus:latest ."
+
+        }
+
+        stage('Docker hub login and push Docker Image to docker hub')
+        {
+            
+            withCredentials([usernamePassword(credentialsId: 'DockerCredentials', passwordVariable: 'pwd', usernameVariable: 'username')]) {
+             sh "docker login -u ${env.username} -p ${env.pwd}"
+                    sh 'docker push bapathuashokreddy/cubus:latest'
+        }
+                
+        }
+      stage('Run the container')
+      {
+          sh 'docker run -d -p 90:80 --name Cubus bapathuashokreddy/cubus:latest'
+        
+      }
+    }
