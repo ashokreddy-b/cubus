@@ -34,7 +34,13 @@ git branch: 'main', url: 'https://github.com/ashokreddy-b/cubus.git'
         }
       stage('Run the container')
       {
-          sh 'docker run -d -p 90:80 --name Cubus bapathuashokreddy/cubus:latest'
+          sh 'docker run -d -p 80:80 --name Cubus bapathuashokreddy/cubus:latest'
         
       }
+     emailext (
+                subject: "Cubus Pipeline Status:: ${currentBuild.currentResult}",
+                body: "The build status is: ${currentBuild.currentResult}",
+                recipientProviders: [[$class: 'CulpritsRecipientProvider']],
+                to: "bapathu.ashokreddy@avinsystems.com" 
+            )
     }
