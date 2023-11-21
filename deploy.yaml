@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cubus-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cubus
+  template:
+    metadata:
+      labels:
+        app: cubus
+    spec:
+      containers:
+      - name: cubus
+        image: bapathuashokreddy/cubus
