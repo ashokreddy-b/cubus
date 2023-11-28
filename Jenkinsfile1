@@ -37,6 +37,21 @@ git branch: 'main', url: 'https://github.com/ashokreddy-b/cubus.git'
           sh 'docker run -d -p 80:80 --name Cubus bapathuashokreddy/cubus:latest'
         
       }
+stage('deploy the Minikube Cluster')
+      {
+          sshagent(['sshCredentials']) {
+              sh "scp -o strictHostKeyChecking=no deploy.yaml ubuntu@172.31.6.233:/home/ubuntu"
+              script{
+                  try{
+                      sh "ssh ubuntu@172.31.6.233 kubectl apply -f ."
+                  }catch(erro)
+                  {
+                      sh "ssh ubuntu@172.31.6.233 kubectl create -f ."
+                  }
+              }
+            
+            }
+      }
      emailext (
                 subject: "Cubus Pipeline Status:: ${currentBuild.currentResult}",
                 body: "The build status is: ${currentBuild.currentResult}",
