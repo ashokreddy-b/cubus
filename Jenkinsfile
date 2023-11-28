@@ -39,6 +39,23 @@ pipeline {
         }
       }
     }
+    stage('deploy the Minikube Cluster')
+      {
+        steps{
+          sshagent(['sshCredentials']) {
+              sh "scp -o strictHostKeyChecking=no deploy.yaml ubuntu@172.31.6.233:/home/ubuntu"
+              script{
+                  try{
+                      sh "ssh ubuntu@172.31.6.233 kubectl apply -f ."
+                  }catch(erro)
+                  {
+                      sh "ssh ubuntu@172.31.6.233 kubectl create -f ."
+                  }
+              }
+            
+            }
+        }
+      }
      post {
         success {
             emailext (
