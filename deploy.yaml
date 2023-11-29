@@ -1,12 +1,13 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cubus-deployment
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: cubus
+  replicas: 2
   template:
     metadata:
       labels:
@@ -14,7 +15,16 @@ spec:
     spec:
       containers:
       - name: cubus
-        image: bapathuashokreddy/cubus
+        image: cubus:latest
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "256Mi"
+          requests:
+            cpu: "0.25"
+            memory: "128Mi"
+        ports:
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -23,8 +33,8 @@ metadata:
 spec:
   selector:
     app: cubus
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
   type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 32001
