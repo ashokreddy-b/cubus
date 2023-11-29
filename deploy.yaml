@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: cubus
-        image: cubus:latest
+        image: bapathuashokreddy/cubus
         resources:
           limits:
             cpu: "0.5"
