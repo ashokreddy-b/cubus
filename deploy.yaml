@@ -33,8 +33,7 @@ metadata:
 spec:
   selector:
     app: cubus
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 32001
